@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getUserProfile } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/Loader/Loader';
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
     const { logout } = useAuth();
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -23,11 +24,10 @@ const UserProfile = () => {
 
         fetchProfile();
     }, []);
-
     const handleLogout = () => {
-        logout();
-        window.location.href = '/';
-    };
+    logout();
+    navigate('/');
+};
 
     if (loading) return <Loader />;
 

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { getAdminProfile } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/Loader/Loader';
-
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
     const { logout } = useAuth();
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -26,7 +26,7 @@ const Profile = () => {
 
     const handleLogout = () => {
         logout();
-        window.location.href = '/login';
+        navigate('/');
     };
 
     if (loading) return <Loader />;
