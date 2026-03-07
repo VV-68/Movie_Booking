@@ -93,11 +93,21 @@ seatsPerRow,
     }
 
     // Generate seat layout
+    const actualRows = Number(totalRows) || 10;
+    const actualSeatsPerRow = Number(seatsPerRow) || 10;
+
+    if (actualRows > 26) {
+        res.status(400);
+        throw new Error('Total rows cannot exceed 26');
+    }
+
+    if (actualSeatsPerRow <= 0) {
+        res.status(400);
+        throw new Error('Seats per row must be greater than 0');
+    }
+
     const seats = [];
     const rows = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
-    const actualRows = totalRows || 10;
-    const actualSeatsPerRow = seatsPerRow || 10;
 
     for (let r = 0; r < actualRows; r++) {
         for (let s = 1; s <= actualSeatsPerRow; s++) {

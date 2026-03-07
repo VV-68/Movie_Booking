@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MovieCard.css';
 
-const MovieCard = ({ movieId, title, poster, language, duration }) => {
+const MovieCard = ({ movieId, title, poster, language, duration, isAdmin = false }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="movie-card" onClick={() => navigate(`/movie/${movieId}`)}>
+        <div className="movie-card" onClick={() => navigate(`${isAdmin ? '/admin' : ''}/movie/${movieId}`)}>
             <div className="movie-poster-container">
                 <img src={poster} alt={title} className="movie-poster" />
             </div>
@@ -17,7 +17,7 @@ const MovieCard = ({ movieId, title, poster, language, duration }) => {
                     className="btn btn-primary view-details-btn"
                     onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/movie/${movieId}`);
+                        navigate(`${isAdmin ? '/admin' : ''}/movie/${movieId}`);
                     }}
                 >
                     View Details

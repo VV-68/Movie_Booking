@@ -6,6 +6,9 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isTheatreOwner, setIsTheatreOwner] = useState(false);
+    const [theatreName, setTheatreName] = useState('');
+    const [location, setLocation] = useState('');
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -15,7 +18,12 @@ const Register = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await registerUser({ name, email, password });
+            const payload = { name, email, password };
+            if (isTheatreOwner) {
+                payload.theatreName = theatreName;
+                payload.location = location;
+            }
+            const response = await registerUser(payload);
             if (response.data && response.data.token) {
                 // Optionally log the user in immediately; for now, redirect to login
                 // eslint-disable-next-line no-alert
@@ -92,6 +100,51 @@ const Register = () => {
                             onBlur={(e) => e.target.style.borderColor = '#ccc'}
                         />
                     </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
+                        <input
+                            type="checkbox"
+                            id="isTheatreOwner"
+                            checked={isTheatreOwner}
+                            onChange={(e) => setIsTheatreOwner(e.target.checked)}
+                            style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                        />
+                        <label htmlFor="isTheatreOwner" style={{ color: '#555', cursor: 'pointer', fontWeight: '500' }}>
+                            Register as Theatre Owner
+                        </label>
+                    </div>
+
+                    {isTheatreOwner && (
+                        <>
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555', fontWeight: '500' }}>Theatre Name</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter theatre name"
+                                    required={isTheatreOwner}
+                                    value={theatreName}
+                                    onChange={(e) => setTheatreName(e.target.value)}
+                                    style={inputStyle}
+                                    onFocus={(e) => e.target.style.borderColor = '#e50914'}
+                                    onBlur={(e) => e.target.style.borderColor = '#ccc'}
+                                />
+                            </div>
+
+                            <div>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555', fontWeight: '500' }}>Location</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter city or area"
+                                    required={isTheatreOwner}
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    style={inputStyle}
+                                    onFocus={(e) => e.target.style.borderColor = '#e50914'}
+                                    onBlur={(e) => e.target.style.borderColor = '#ccc'}
+                                />
+                            </div>
+                        </>
+                    )}
 
                     <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', padding: '0.8rem', marginTop: '1rem' }}>
                         {loading ? 'Registering...' : 'Register'}

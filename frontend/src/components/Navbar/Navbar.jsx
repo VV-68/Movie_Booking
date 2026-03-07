@@ -1,16 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import './Navbar.css';
 
 const Navbar = () => {
-    const { token, logout } = useAuth();
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
+    const { token } = useAuth();
 
     return (
         <nav className="navbar">
@@ -28,7 +22,7 @@ const Navbar = () => {
                     ) : (
                         <>
                             <Link to="/my-bookings">My Bookings</Link>
-                            <button onClick={handleLogout} className="logout-btn">Logout</button>
+                            <Link className="profile-btn" to="/profile">Profile</Link>
                         </>
                     )}
                 </div>

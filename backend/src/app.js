@@ -9,6 +9,7 @@ const seatRoutes = require('./routes/seat.routes');
 const bookingRoutes = require('./routes/booking.routes');
 const theatreRoutes = require('./routes/theatre.routes');
 const searchRoutes = require('./routes/search.routes');
+const profileRoutes = require('./routes/profile.routes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/seats', seatRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/theatres', theatreRoutes);
 app.use('/api/search', searchRoutes);
+app.use('/api/profile', profileRoutes);
 
 // Health check
 app.get('/', (req, res) => {

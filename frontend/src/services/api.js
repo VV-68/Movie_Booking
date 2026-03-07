@@ -45,3 +45,7 @@ export const deleteBooking = (id) => API.delete(`/bookings/${id}`);
 
 export const searchByLocation = (location) => API.get(`/search/location/${location}`);
 
+export const getAdminProfile = () => API.get('/profile/admin');
+
+export const getUserProfile = () => API.get('/profile/user');
+

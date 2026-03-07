@@ -9,6 +9,8 @@ const AdminCreateShow = () => {
         movieId: '',
         showTime: '',
         price: '',
+        totalRows: 10,
+        seatsPerRow: 12,
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -46,6 +48,8 @@ const AdminCreateShow = () => {
                 movieId: form.movieId,
                 showTime: form.showTime,
                 price: Number(form.price),
+                totalRows: Number(form.totalRows),
+                seatsPerRow: Number(form.seatsPerRow)
             };
             await createShow(payload);
             // eslint-disable-next-line no-alert
@@ -130,6 +134,93 @@ const AdminCreateShow = () => {
                         required
                         style={inputStyle}
                     />
+                </div>
+
+                <div style={{ padding: '1.5rem', border: '1px solid #ddd', borderRadius: '8px', background: '#f9f9f9', marginTop: '1rem' }}>
+                    <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.2rem', color: '#444' }}>Seat Layout</h3>
+                    <div style={{ display: 'flex', gap: '1rem' }}>
+                        <div style={{ flex: 1 }}>
+                            <label style={{ display: 'block', marginBottom: '0.4rem' }}>Number of Rows (Max 26)</label>
+                            <input
+                                type="number"
+                                name="totalRows"
+                                min="1"
+                                max="26"
+                                value={form.totalRows}
+                                onChange={handleChange}
+                                required
+                                style={inputStyle}
+                            />
+                        </div>
+                        <div style={{ flex: 1 }}>
+                            <label style={{ display: 'block', marginBottom: '0.4rem' }}>Seats per Row</label>
+                            <input
+                                type="number"
+                                name="seatsPerRow"
+                                min="1"
+                                value={form.seatsPerRow}
+                                onChange={handleChange}
+                                required
+                                style={inputStyle}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: '2rem' }}>
+                        <h4 style={{ margin: '0 0 1rem 0', color: '#666', fontSize: '1rem' }}>Live Preview</h4>
+                        <div style={{
+                            width: '100%',
+                            height: '6px',
+                            background: '#ccc',
+                            borderRadius: '4px',
+                            marginBottom: '1rem',
+                            textAlign: 'center',
+                            position: 'relative'
+                        }}>
+                             <span style={{ position: 'absolute', top: '10px', left: '50%', transform: 'translateX(-50%)', fontSize: '0.7rem', color: '#999', letterSpacing: '1px' }}>SCREEN</span>
+                        </div>
+                        
+                        <div style={{ 
+                            marginTop: '2rem',
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            gap: '0.4rem', 
+                            alignItems: 'center',
+                            overflowX: 'auto',
+                            paddingBottom: '1rem'
+                        }}>
+                            {Array.from({ length: Math.min(Number(form.totalRows) || 0, 26) }).map((_, rIndex) => {
+                                const rowLabel = String.fromCharCode(65 + rIndex);
+                                return (
+                                    <div key={rowLabel} style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+                                        <span style={{ width: '20px', fontWeight: 'bold', fontSize: '0.8rem', color: '#555', textAlign: 'right', marginRight: '0.5rem' }}>{rowLabel}</span>
+                                        <div style={{ display: 'flex', gap: '0.3rem' }}>
+                                            {Array.from({ length: Number(form.seatsPerRow) || 0 }).map((_, sIndex) => (
+                                                <div 
+                                                    key={`${rowLabel}${sIndex + 1}`}
+                                                    title={`${rowLabel}${sIndex + 1}`}
+                                                    style={{ 
+                                                        width: '24px', 
+                                                        height: '24px', 
+                                                        background: '#fff', 
+                                                        border: '1px solid #28a745',
+                                                        borderRadius: '4px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        fontSize: '0.6rem',
+                                                        color: '#333'
+                                                    }}
+                                                >
+                                                    {sIndex + 1}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
                 <button
                     type="submit"
