@@ -6,8 +6,10 @@ const AdminNavbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('adminUser');
+        localStorage.removeItem('userInfo');
         localStorage.removeItem('token');
-        navigate('/admin/login');
+        sessionStorage.clear();
+        navigate('/login');
     };
 
     const navStyle = {
@@ -42,8 +44,8 @@ const AdminNavbar = () => {
 
     return (
         <nav style={navStyle}>
-            <h2>Movie Booking Admin</h2>
             <div style={linkContainerStyle}>
+                <Link to="/" style={linkStyle}>Home</Link>
                 <Link to="/admin/dashboard" style={linkStyle}>Dashboard</Link>
                 <Link to="/admin/create-movie" style={linkStyle}>Create Movie</Link>
                 <Link to="/admin/create-show" style={linkStyle}>Create Show</Link>

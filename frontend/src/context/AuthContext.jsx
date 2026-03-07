@@ -39,6 +39,9 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
         setUser(null);
         localStorage.removeItem("adminUser");
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("token");
+        sessionStorage.clear();
     };
 
     return (
