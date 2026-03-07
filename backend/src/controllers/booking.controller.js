@@ -30,7 +30,13 @@ const confirmBooking = async (req, res, next) => {
 
 const getUserBookings = async (req, res, next) => {
     try {
-        const bookings = await Booking.find({ userId: req.user._id }).populate('showId');
+        const bookings = await Booking.find({ userId: req.user._id }).populate({
+            path: 'showId',
+            populate: [
+                { path: 'movieId' },
+                { path: 'theatreId' }
+            ]
+        });
         return res.json(bookings);
     } catch (error) {
         return next(error);

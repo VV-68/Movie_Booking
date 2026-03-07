@@ -15,6 +15,8 @@ API.interceptors.request.use((config) => {
 
 export const getMovies = () => API.get('/movies');
 
+export const getAllShows = () => API.get('/shows');
+
 export const getMovieDetails = (id) => API.get(`/movies/${id}`);
 
 export const getShowtimes = (movieId) => API.get(`/shows/${movieId}`);
