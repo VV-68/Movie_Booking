@@ -26,7 +26,7 @@ const UserProfile = () => {
 
     const handleLogout = () => {
         logout();
-        window.location.href = '/login';
+        window.location.href = '/';
     };
 
     if (loading) return <Loader />;
