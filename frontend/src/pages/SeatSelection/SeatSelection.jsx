@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getSeats } from '../../services/api';
-import { calculateTotalPrice } from '../../utils/seatUtils';
+import { getSeats, getShowById } from '../../services/api';
 import Seat from '../../components/Seat/Seat';
 import Loader from '../../components/Loader/Loader';
 import useAuth from '../../hooks/useAuth';
@@ -13,12 +12,17 @@ const SeatSelection = () => {
     const [layout, setLayout] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showPrice, setShowPrice] = useState(0);
 
     useEffect(() => {
-        const fetchSeats = async () => {
+        const fetchSeatsAndShow = async () => {
             try {
-                const response = await getSeats(showId);
-                const seats = response.data || [];
+                const [seatsResponse, showResponse] = await Promise.all([
+                    getSeats(showId),
+                    getShowById(showId)
+                ]);
+                const seats = seatsResponse.data || [];
+                setShowPrice(showResponse.data?.price || 0);
 
                 // Group seats by row from backend data
                 const grouped = seats.reduce((acc, seat) => {
@@ -46,7 +50,7 @@ const SeatSelection = () => {
                 setLoading(false);
             }
         };
-        fetchSeats();
+        fetchSeatsAndShow();
     }, [showId]);
 
     const toggleSeat = (seatId) => {
@@ -67,7 +71,7 @@ const SeatSelection = () => {
             navigate('/login');
             return;
         }
-        const totalPrice = calculateTotalPrice(selectedSeats.length);
+        const totalPrice = selectedSeats.length * showPrice;
         navigate('/booking', { state: { showId, selectedSeats, totalPrice } });
     };
 
@@ -156,7 +160,7 @@ const SeatSelection = () => {
                     <div style={{ textAlign: 'left' }}>
                         <h3 style={{ margin: '0 0 0.5rem 0', color: '#222' }}>Selected: {selectedSeats.join(', ')}</h3>
                         <p style={{ margin: 0, fontSize: '1.2rem', color: '#222', fontWeight: 'bold' }}>
-                            Total: <span style={{ color: '#e50914' }}>₹{calculateTotalPrice(selectedSeats.length)}</span>
+                            Total: <span style={{ color: '#e50914' }}>₹{selectedSeats.length * showPrice}</span>
                         </p>
                     </div>
                     <button

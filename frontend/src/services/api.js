@@ -41,3 +41,7 @@ export const registerUser = (data) => API.post('/auth/register', data);
 
 export const getCurrentUserBookings = () => API.get('/bookings/user');
 
+export const deleteBooking = (id) => API.delete(`/bookings/${id}`);
+
+export const searchByLocation = (location) => API.get(`/search/location/${location}`);
+

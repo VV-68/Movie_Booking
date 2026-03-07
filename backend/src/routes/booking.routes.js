@@ -4,6 +4,7 @@ const {
     confirmBooking,
     getUserBookings,
     getBookingsForUserId,
+    deleteBooking,
 } = require('../controllers/booking.controller');
 const { protect } = require('../middleware/auth.middleware');
 const { admin } = require('../middleware/role.middleware');
@@ -18,5 +19,9 @@ router.route('/user')
 // Specific user's bookings (admin only)
 router.route('/user/:userId')
     .get(protect, admin, getBookingsForUserId);
+
+// Delete specific booking
+router.route('/:id')
+    .delete(protect, deleteBooking);
 
 module.exports = router;

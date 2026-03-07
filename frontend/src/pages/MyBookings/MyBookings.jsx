@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCurrentUserBookings } from '../../services/api';
+import { getCurrentUserBookings, deleteBooking } from '../../services/api';
 import Loader from '../../components/Loader/Loader';
 
 const MyBookings = () => {
@@ -21,6 +21,20 @@ const MyBookings = () => {
 
         fetchBookings();
     }, []);
+
+    const handleCancelBooking = async (bookingId) => {
+        const confirm = window.confirm('Are you sure you want to cancel this booking?');
+        if (!confirm) return;
+
+        try {
+            await deleteBooking(bookingId);
+            setBookings((prev) => prev.filter((b) => b._id !== bookingId));
+            alert('Booking cancelled successfully');
+        } catch (error) {
+            console.error('Error cancelling booking', error);
+            alert(error.response?.data?.message || 'Failed to cancel booking');
+        }
+    };
 
     if (loading) return <Loader />;
 
@@ -80,6 +94,21 @@ const MyBookings = () => {
                                     <p style={{ margin: 0, color: '#777', fontSize: '0.8rem', marginTop: '0.5rem' }}>
                                         <strong>Booked On:</strong> {new Date(bookingTime).toLocaleString()}
                                     </p>
+                                    <button 
+                                        onClick={() => handleCancelBooking(booking._id)}
+                                        style={{ 
+                                            marginTop: '1rem', 
+                                            padding: '0.6rem', 
+                                            background: '#dc3545', 
+                                            color: 'white', 
+                                            border: 'none', 
+                                            borderRadius: '4px', 
+                                            cursor: 'pointer',
+                                            fontWeight: 'bold'
+                                        }}
+                                    >
+                                        Cancel Booking
+                                    </button>
                                 </div>
                             </div>
                         );

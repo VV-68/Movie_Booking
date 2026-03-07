@@ -59,8 +59,53 @@ const getBookingsForUserId = async (req, res, next) => {
     }
 };
 
+const deleteBooking = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400);
+            throw new Error('Invalid booking id');
+        }
+
+        const booking = await Booking.findById(id);
+        if (!booking) {
+            res.status(404);
+            throw new Error('Booking not found');
+        }
+
+        if (booking.userId.toString() !== req.user._id.toString()) {
+            res.status(403);
+            throw new Error('Not authorized to delete this booking');
+        }
+
+        // Update the show seats
+        const { unbookSeatsService } = require('../services/booking.service');
+        if (unbookSeatsService) {
+          await unbookSeatsService(booking.showId, booking.seats);
+        } else {
+            const Show = require('../models/show.model');
+            const show = await Show.findById(booking.showId);
+            if (show) {
+                show.seats.forEach(seat => {
+                    if (booking.seats.includes(seat.seatNumber)) {
+                        seat.isBooked = false;
+                    }
+                });
+                await show.save();
+            }
+        }
+
+        await booking.deleteOne();
+        return res.status(200).json({ message: 'Booking cancelled successfully' });
+    } catch (error) {
+        return next(error);
+    }
+};
+
 module.exports = {
     confirmBooking,
     getUserBookings,
     getBookingsForUserId,
+    deleteBooking,
 };
