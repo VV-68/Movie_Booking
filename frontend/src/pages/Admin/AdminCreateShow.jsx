@@ -70,6 +70,12 @@ const AdminCreateShow = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem', maxWidth: '700px' }}>
+            <button 
+                onClick={() => navigate("/admin/dashboard")} 
+                style={{ marginBottom: '1rem', padding: '0.5rem 1rem', background: '#6c757d', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+                Back to Dashboard
+            </button>
             <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Create Show</h2>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                 {error && (
