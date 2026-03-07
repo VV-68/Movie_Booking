@@ -25,9 +25,12 @@ const AdminLogin = () => {
                 return;
             }
 
-            // Persist admin info separately for admin pages
+            // Persist admin info separately for admin pages and as general user
             localStorage.setItem('adminUser', JSON.stringify(user));
-            login(token);
+            localStorage.setItem('user', JSON.stringify(user));
+            // eslint-disable-next-line no-console
+            console.log('Logged admin user:', user);
+            login(token, user);
             navigate('/admin/dashboard');
         } catch (err) {
             setError('Invalid credentials or server error');

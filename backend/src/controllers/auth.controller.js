@@ -10,10 +10,18 @@ const getJwtSecret = () => {
     return secret;
 };
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, getJwtSecret(), {
-        expiresIn: '30d',
-    });
+const generateToken = (user) => {
+    return jwt.sign(
+        {
+            id: user._id,
+            role: user.role,
+            theatreId: user.theatreId,
+        },
+        getJwtSecret(),
+        {
+            expiresIn: '30d',
+        },
+    );
 };
 
 const registerUser = async (req, res, next) => {
@@ -58,7 +66,7 @@ const registerUser = async (req, res, next) => {
         }
 
         return res.status(201).json({
-            token: generateToken(user._id),
+            token: generateToken(user),
             user: {
                 _id: user.id,
                 name: user.name,
@@ -89,7 +97,7 @@ const loginUser = async (req, res, next) => {
         }
 
         return res.json({
-            token: generateToken(user._id),
+            token: generateToken(user),
             user: {
                 _id: user.id,
                 name: user.name,

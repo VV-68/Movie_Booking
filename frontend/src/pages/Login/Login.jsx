@@ -17,9 +17,17 @@ const Login = () => {
         setError('');
         try {
             const response = await loginUser({ email, password });
-            if (response.data && response.data.token) {
-                login(response.data.token);
-                navigate('/');
+            const { token, user } = response.data || {};
+            if (token && user) {
+                // Persist user for general app use
+                // eslint-disable-next-line no-console
+                console.log('Logged user:', user);
+                login(token, user);
+                if (user.role === 'admin') {
+                    navigate('/admin/dashboard');
+                } else {
+                    navigate('/');
+                }
             } else {
                 setError('Unexpected response from server');
             }
