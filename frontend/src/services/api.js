@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://movie-booking-ivvj.onrender.com',
+    baseURL: 'https://movie-booking-ivvj.onrender.com/api',
 });
 
 API.interceptors.request.use((config) => {
