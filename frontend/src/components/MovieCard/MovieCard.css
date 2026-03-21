@@ -71,3 +71,30 @@
     border-radius: 8px;
     font-size: 1.05rem;
 }
+
+/* ═══════════════════════════════════
+   LIGHT MODE OVERRIDES — MovieCard
+   ═══════════════════════════════════ */
+
+body.light .movie-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+body.light .movie-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border-color: #ccc;
+}
+
+body.light .movie-poster-container {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+body.light .movie-title {
+    color: #111;
+}
+
+body.light .movie-meta {
+    color: #555;
+}

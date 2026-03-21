@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { useTheme } from '../../context/ThemeContext';
 import './Navbar.css';
 
 const Navbar = () => {
     const { token, logout } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -32,6 +34,13 @@ const Navbar = () => {
                             <button className="logout-btn" onClick={handleLogout}>Logout</button>
                         </>
                     )}
+                    <button
+                        className="theme-toggle-btn"
+                        onClick={toggleTheme}
+                        title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                    >
+                        {theme === 'dark' ? '☀️' : '🌙'}
+                    </button>
                 </div>
             </div>
         </nav>

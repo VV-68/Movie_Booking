@@ -5,7 +5,12 @@
     padding: 0 1.5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #ffffff;
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -77,7 +82,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Global Form Inputs */
-input, select, textarea {
+input,
+select,
+textarea {
     width: 100%;
     padding: 0.8rem 1.2rem;
     border-radius: 12px;
@@ -88,16 +95,19 @@ input, select, textarea {
     transition: all 0.3s ease;
     outline: none;
     font-family: inherit;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: rgba(255, 255, 255, 0.4);
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
     border-color: #e50914;
-    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.25), inset 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     background: rgba(255, 255, 255, 0.12);
 }
 
@@ -110,7 +120,8 @@ label {
 }
 
 /* Dropdown specific fixes */
-select, .custom-select {
+select,
+.custom-select {
     appearance: none !important;
     background: #1a1a1a url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") no-repeat right 1.2rem top 50% !important;
     background-size: 0.65rem auto !important;
@@ -131,7 +142,8 @@ select option {
     color: #ffffff !important;
 }
 
-select:hover, .custom-select:hover {
+select:hover,
+.custom-select:hover {
     background-color: #2a2a2a !important;
 }
 
@@ -143,11 +155,25 @@ select:hover, .custom-select:hover {
 
 
 /* Utils */
-.text-center { text-align: center; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-4 { margin-top: 1rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-4 { margin-bottom: 1rem; }
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
 
 /* Premium Form Containers */
 .form-container {
@@ -180,4 +206,145 @@ select:hover, .custom-select:hover {
 .form-link:hover {
     color: #ff4b4b;
     text-decoration: underline;
+}
+
+/* ═══════════════════════════════════
+   LIGHT MODE OVERRIDES
+   ═══════════════════════════════════ */
+
+body.light h1,
+body.light h2,
+body.light h3,
+body.light h4,
+body.light h5,
+body.light h6 {
+    color: #111;
+}
+
+/* Buttons */
+body.light .btn {
+    background: rgba(0, 0, 0, 0.06);
+    color: #111;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light .btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light .btn-primary {
+    background: linear-gradient(135deg, #4CAFA7, #33918a);
+    color: #fff;
+}
+
+body.light .btn-primary:hover {
+    background: linear-gradient(135deg, #3d9e97, #2a7e78);
+    box-shadow: 0 8px 25px rgba(76, 175, 167, 0.4);
+}
+
+/* Cards */
+body.light .card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    color: #111;
+}
+
+body.light .card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-color: #ccc;
+}
+
+/* Inputs */
+body.light input,
+body.light select,
+body.light textarea {
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    color: #111;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.light input::placeholder,
+body.light textarea::placeholder {
+    color: #999;
+}
+
+body.light input:focus,
+body.light select:focus,
+body.light textarea:focus {
+    border-color: #4CAFA7;
+    box-shadow: 0 0 0 3px rgba(76, 175, 167, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+}
+
+body.light label {
+    color: #333;
+}
+
+/* Dropdowns */
+body.light select,
+body.light .custom-select {
+    background-color: #ffffff !important;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1.2rem top 50% !important;
+    background-size: 0.65rem auto !important;
+    color: #111 !important;
+}
+
+body.light select option {
+    background-color: #ffffff !important;
+    color: #111 !important;
+}
+
+body.light select:hover,
+body.light .custom-select:hover {
+    background-color: #f5f5f5 !important;
+}
+
+/* Form links */
+body.light .form-link {
+    color: #4CAFA7;
+}
+
+body.light .form-link:hover {
+    color: #33918a;
+}
+
+/* ─── Light mode: global text color reset ──────────────────────────────── */
+/*
+ * React renders inline styles as computed values (e.g. "rgb(255,255,255)")
+ * so [style*="color:#fff"] CSS attribute selectors do NOT work.
+ *
+ * Instead, we use the CSS cascade:
+ *   body.light {
+    color: #111 !important;
+}
+
+/*
+ * color: inherit !important is the key:
+ * Without !important, React inline styles (style={{ color:'#fff' }}) beat CSS rules.
+ * With !important, the inherited value (#111 from body.light) overrides ALL inline colors.
+ * We carve out exceptions for elements that need to keep white text on colored backgrounds.
+ */
+body.light *:not(.register-btn):not(.profile-btn):not(.theme-toggle-btn):not(.btn-primary):not(.view-details-btn):not(.ticket-header):not(.ticket-header *):not(.seat):not(.close-btn):not(.logout-btn) {
+    color: inherit !important;
+}
+
+/* Restore white text on teal/colored backgrounds */
+body.light .register-btn,
+body.light .profile-btn,
+body.light .btn-primary,
+body.light .view-details-btn,
+body.light .ticket-header h2,
+body.light .seat {
+    color: #fff !important;
+}
+
+/* Filter panel "Clear Filters" button: teal instead of red/orange */
+body.light .filter-panel button {
+    background: #4CAFA7 !important;
+    color: #fff !important;
 }

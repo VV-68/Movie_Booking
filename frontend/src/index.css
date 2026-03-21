@@ -39,3 +39,22 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3); 
 }
+
+/* ─── Light Mode ─── */
+body.light {
+  background: #f0f2f5;
+  background-attachment: fixed;
+  color: #111;
+}
+
+body.light ::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+body.light ::-webkit-scrollbar-thumb {
+  background: #bbb;
+}
+
+body.light ::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

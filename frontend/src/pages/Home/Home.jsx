@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { getMovies, searchByLocation } from '../../services/api';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import Loader from '../../components/Loader/Loader';
+import { useTheme } from '../../context/ThemeContext';
 
 const Home = () => {
     // Core state
     const [allMovies, setAllMovies] = useState([]);
     const [moviesToShow, setMoviesToShow] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { theme } = useTheme();
+    const isLight = theme === 'light';
 
     // Filter states
     const [searchTerm, setSearchTerm] = useState('');
@@ -101,12 +105,12 @@ const Home = () => {
 
     // --- Styling definitions ---
     const panelStyle = {
-        background: 'rgba(255,255,255,0.05)',
+        background: isLight ? '#ffffff' : 'rgba(255,255,255,0.05)',
         backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255,255,255,0.1)',
+        border: isLight ? '1px solid #e0e0e0' : '1px solid rgba(255,255,255,0.1)',
         padding: '1.5rem',
         borderRadius: '12px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+        boxShadow: isLight ? '0 4px 20px rgba(0,0,0,0.08)' : '0 8px 32px rgba(0,0,0,0.2)',
         marginBottom: '2rem',
         display: 'flex',
         flexDirection: 'column',
@@ -119,12 +123,12 @@ const Home = () => {
     const searchInputStyle = {
         padding: '0.8rem 1.2rem',
         borderRadius: '8px',
-        border: '1px solid rgba(255,255,255,0.2)',
+        border: isLight ? '1px solid #d0d0d0' : '1px solid rgba(255,255,255,0.2)',
         fontSize: '1rem',
         width: '100%',
         outline: 'none',
-        background: 'rgba(0,0,0,0.2)',
-        color: '#fff'
+        background: isLight ? '#ffffff' : 'rgba(0,0,0,0.2)',
+        color: isLight ? '#111' : '#fff'
     };
 
     const filtersRowStyle = {
@@ -143,14 +147,14 @@ const Home = () => {
 
     const labelStyle = {
         fontWeight: 'bold',
-        color: '#ccc',
+        color: isLight ? '#333' : '#ccc',
         fontSize: '0.9rem',
         minWidth: '75px'
     };
 
     const btnStyle = {
         padding: '0.6rem 1.2rem',
-        background: '#dc3545',
+        background: isLight ? '#4CAFA7' : '#dc3545',
         color: '#fff',
         border: 'none',
         borderRadius: '4px',
@@ -158,6 +162,31 @@ const Home = () => {
         fontSize: '0.95rem',
         fontWeight: 'bold',
         whiteSpace: 'nowrap'
+    };
+
+    const dropdownMenuStyle = {
+        position: 'absolute',
+        top: '100%',
+        left: 0,
+        right: 0,
+        background: isLight ? '#ffffff' : '#1a1a1a',
+        border: isLight ? '1px solid #d0d0d0' : '1px solid rgba(255,255,255,0.2)',
+        borderRadius: '8px',
+        marginTop: '4px',
+        zIndex: 10000,
+        boxShadow: isLight ? '0 8px 20px rgba(0,0,0,0.12)' : '0 8px 32px rgba(0,0,0,0.4)',
+        color: isLight ? '#111' : '#fff'
+    };
+
+    const dropdownInputStyle = {
+        width: '100%',
+        padding: '0.5rem',
+        border: isLight ? '1px solid #d0d0d0' : '1px solid rgba(255,255,255,0.2)',
+        borderRadius: '4px',
+        outline: 'none',
+        fontSize: '0.9rem',
+        background: isLight ? '#f5f5f5' : 'rgba(0,0,0,0.3)',
+        color: isLight ? '#111' : '#fff'
     };
 
     // Location Dropdown variables
@@ -203,35 +232,14 @@ const Home = () => {
                             </div>
 
                             {isLocationDropdownOpen && (
-                                <div className="custom-dropdown-menu" style={{
-                                    position: 'absolute',
-                                    top: '100%',
-                                    left: 0,
-                                    right: 0,
-                                    background: '#1a1a1a',
-                                    border: '1px solid rgba(255,255,255,0.2)',
-                                    borderRadius: '8px',
-                                    marginTop: '4px',
-                                    zIndex: 10000,
-                                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-                                    color: '#fff'
-                                }}>
+                                <div className="custom-dropdown-menu" style={dropdownMenuStyle}>
                                     <div style={{padding: '0.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)'}}>
                                         <input 
                                             type="text" 
                                             placeholder="Search location..."
                                             value={locationSearchTerm}
                                             onChange={(e) => setLocationSearchTerm(e.target.value)}
-                                            style={{
-                                                width: '100%',
-                                                padding: '0.5rem',
-                                                border: '1px solid rgba(255,255,255,0.2)',
-                                                borderRadius: '4px',
-                                                outline: 'none',
-                                                fontSize: '0.9rem',
-                                                background: 'rgba(0,0,0,0.3)',
-                                                color: '#fff'
-                                            }}
+                                            style={dropdownInputStyle}
                                         />
                                     </div>
                                     <div style={{maxHeight: '150px', overflowY: 'auto'}}>
@@ -299,7 +307,7 @@ const Home = () => {
                 <p style={{ color: '#ccc' }}>No movies matched your search criteria.</p>
             ) : (
                 <>
-                    <h2 style={{ marginBottom: '1.5rem', color: '#fff', fontSize: '1.5rem' }}>
+                    <h2 style={{ marginBottom: '1.5rem', color: isLight ? '#111' : '#fff', fontSize: '1.5rem' }}>
                         {selectedLocation ? `Movies in ${selectedLocation}` : 'Recommended Movies'}
                     </h2>
                     <div
