@@ -6,6 +6,7 @@ import Register from '../pages/Register/Register';
 import MovieDetails from '../pages/MovieDetails/MovieDetails';
 import SeatSelection from '../pages/SeatSelection/SeatSelection';
 import Booking from '../pages/Booking/Booking';
+import Payment from '../pages/Payment/Payment';
 import MyBookings from '../pages/MyBookings/MyBookings';
 import AdminLogin from '../pages/Admin/AdminLogin';
 import AdminDashboard from '../pages/Admin/AdminDashboard';
@@ -29,6 +30,7 @@ const AppRoutes = () => {
             <Route path="/movie/:id" element={<MovieDetails />} />
             <Route path="/seats/:showId" element={<SeatSelection />} />
             <Route path="/booking" element={<Booking />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="/my-bookings" element={<MyBookings />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/admin/login" element={<AdminLogin />} />

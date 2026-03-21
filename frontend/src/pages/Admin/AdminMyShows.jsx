@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getShowtimes, getSeats, updateShow, deleteShow } from '../../services/api';
 
 // Note: we'll use GET /api/shows for all shows via getShowtimes with a dummy movieId pattern is not ideal,
@@ -70,8 +71,7 @@ const AdminMyShows = () => {
             setShows((prev) => prev.map((s) => (s._id === id ? updated : s)));
             cancelEdit();
         } catch (err) {
-            // eslint-disable-next-line no-alert
-            alert('Failed to update show');
+            toast.error('Failed to update show');
         }
     };
 
@@ -83,8 +83,7 @@ const AdminMyShows = () => {
             await deleteShow(id);
             setShows((prev) => prev.filter((s) => s._id !== id));
         } catch (err) {
-            // eslint-disable-next-line no-alert
-            alert('Failed to delete show');
+            toast.error('Failed to delete show');
         }
     };
 

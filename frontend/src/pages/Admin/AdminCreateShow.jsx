@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getMovies, createShow } from '../../services/api';
 
 const AdminCreateShow = () => {
@@ -52,8 +53,7 @@ const AdminCreateShow = () => {
                 seatsPerRow: Number(form.seatsPerRow)
             };
             await createShow(payload);
-            // eslint-disable-next-line no-alert
-            alert('Show created successfully');
+            toast.success('Show created successfully');
             navigate('/admin/my-shows');
         } catch (err) {
             setError('Failed to create show');

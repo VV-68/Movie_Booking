@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { bookTickets } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 
@@ -28,33 +29,13 @@ const AdminBooking = () => {
 
     const { showId, selectedSeats, totalPrice } = location.state;
 
-    const handleConfirm = async () => {
-        setIsBooking(true);
-        try {
-            if (!token) {
-                // eslint-disable-next-line no-alert
-                alert('Authentication failed! Please log in.');
-                navigate('/login');
-                return;
-            }
-            const response = await bookTickets({ showId, seats: selectedSeats });
-            if (response.data && response.data._id) {
-                // eslint-disable-next-line no-alert
-                alert('Tickets booked successfully!');
-                navigate("/admin/home");
-            } else {
-                // eslint-disable-next-line no-alert
-                alert('Booking completed, but unexpected response from server.');
-                navigate('/admin/home');
-            }
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error(error);
-            // eslint-disable-next-line no-alert
-            alert('Booking failed. Please try again.');
-        } finally {
-            setIsBooking(false);
+    const handleConfirm = () => {
+        if (!token) {
+            toast.error('Authentication failed! Please log in.');
+            navigate('/login');
+            return;
         }
+        navigate('/payment', { state: { showId, selectedSeats, totalPrice }, replace: false });
     };
 
     return (
@@ -92,17 +73,16 @@ const AdminBooking = () => {
                     className="btn btn-primary"
                     type="button"
                     onClick={handleConfirm}
-                    disabled={isBooking}
+                    disabled={false}
                     style={{
                         width: '100%',
                         padding: '1rem',
                         fontSize: '1.1rem',
                         marginTop: '2.5rem',
-                        opacity: isBooking ? 0.7 : 1,
-                        cursor: isBooking ? 'not-allowed' : 'pointer',
+                        cursor: 'pointer',
                     }}
                 >
-                    {isBooking ? 'Processing Payment...' : 'Confirm & Pay'}
+                    Confirm Payment
                 </button>
             </div>
         </div>

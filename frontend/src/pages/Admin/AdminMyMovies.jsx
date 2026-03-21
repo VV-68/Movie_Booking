@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getMovies, updateMovie, deleteMovie } from '../../services/api';
 
 const AdminMyMovies = () => {
@@ -69,8 +70,7 @@ const AdminMyMovies = () => {
             setMovies((prev) => prev.map((m) => (m._id === id ? updated : m)));
             cancelEdit();
         } catch (err) {
-            // eslint-disable-next-line no-alert
-            alert('Failed to update movie');
+            toast.error('Failed to update movie');
         }
     };
 
@@ -82,8 +82,7 @@ const AdminMyMovies = () => {
             await deleteMovie(id);
             setMovies((prev) => prev.filter((m) => m._id !== id));
         } catch (err) {
-            // eslint-disable-next-line no-alert
-            alert('Failed to delete movie');
+            toast.error('Failed to delete movie');
         }
     };
 

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getCurrentUserBookings, deleteBooking } from '../../services/api';
+import { toast } from 'react-toastify';
 import Loader from '../../components/Loader/Loader';
+import Ticket from '../../components/Ticket/Ticket';
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedTicket, setSelectedTicket] = useState(null);
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -29,10 +32,10 @@ const MyBookings = () => {
         try {
             await deleteBooking(bookingId);
             setBookings((prev) => prev.filter((b) => b._id !== bookingId));
-            alert('Booking cancelled successfully');
+            toast.success('Booking cancelled successfully');
         } catch (error) {
             console.error('Error cancelling booking', error);
-            alert(error.response?.data?.message || 'Failed to cancel booking');
+            toast.error(error.response?.data?.message || 'Failed to cancel booking');
         }
     };
 
@@ -94,26 +97,47 @@ const MyBookings = () => {
                                     <p style={{ margin: 0, color: '#777', fontSize: '0.8rem', marginTop: '0.5rem' }}>
                                         <strong>Booked On:</strong> {new Date(bookingTime).toLocaleString()}
                                     </p>
-                                    <button 
-                                        onClick={() => handleCancelBooking(booking._id)}
-                                        style={{ 
-                                            marginTop: '1rem', 
-                                            padding: '0.6rem', 
-                                            background: '#dc3545', 
-                                            color: 'white', 
-                                            border: 'none', 
-                                            borderRadius: '4px', 
-                                            cursor: 'pointer',
-                                            fontWeight: 'bold'
-                                        }}
-                                    >
-                                        Cancel Booking
-                                    </button>
+                                    <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                                        <button 
+                                            onClick={() => setSelectedTicket(booking)}
+                                            style={{ 
+                                                flex: 1,
+                                                padding: '0.6rem', 
+                                                background: '#007bff', 
+                                                color: 'white', 
+                                                border: 'none', 
+                                                borderRadius: '4px', 
+                                                cursor: 'pointer',
+                                                fontWeight: 'bold'
+                                            }}
+                                        >
+                                            View Ticket
+                                        </button>
+                                        <button 
+                                            onClick={() => handleCancelBooking(booking._id)}
+                                            style={{ 
+                                                flex: 1,
+                                                padding: '0.6rem', 
+                                                background: '#dc3545', 
+                                                color: 'white', 
+                                                border: 'none', 
+                                                borderRadius: '4px', 
+                                                cursor: 'pointer',
+                                                fontWeight: 'bold'
+                                            }}
+                                        >
+                                            Cancel Booking
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         );
                     })}
                 </div>
+            )}
+
+            {selectedTicket && (
+                <Ticket booking={selectedTicket} onClose={() => setSelectedTicket(null)} />
             )}
         </div>
     );

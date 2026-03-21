@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { loginUser } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 
 const AdminLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -14,14 +14,14 @@ const AdminLogin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError('');
+        setLoading(true);
 
         try {
             const response = await loginUser({ email, password });
             const { token, user } = response.data || {};
 
             if (!user || user.role !== 'admin') {
-                setError('You are not authorized as an admin');
+                toast.error('You are not authorized as an admin');
                 return;
             }
 
@@ -31,9 +31,10 @@ const AdminLogin = () => {
             // eslint-disable-next-line no-console
             console.log('Logged admin user:', user);
             login(token, user);
+            toast.success('Admin login successful!');
             navigate('/admin/dashboard');
         } catch (err) {
-            setError('Invalid credentials or server error');
+            toast.error('Invalid credentials or server error');
         } finally {
             setLoading(false);
         }
@@ -55,19 +56,7 @@ const AdminLogin = () => {
                 <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Admin Login</h2>
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                    {error && (
-                        <div
-                            style={{
-                                color: '#dc3545',
-                                background: '#f8d7da',
-                                padding: '0.8rem',
-                                borderRadius: '4px',
-                                textAlign: 'center',
-                            }}
-                        >
-                            {error}
-                        </div>
-                    )}
+                    {/* Error display replaced by toast notification */}
 
                     <div>
                         <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555', fontWeight: '500' }}>

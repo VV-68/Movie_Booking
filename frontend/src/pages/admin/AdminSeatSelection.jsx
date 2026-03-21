@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getSeats, getShowById } from '../../services/api';
 import Seat from '../../components/Seat/Seat';
 import Loader from '../../components/Loader/Loader';
@@ -61,13 +62,11 @@ const AdminSeatSelection = () => {
 
     const handleConfirm = () => {
         if (selectedSeats.length === 0) {
-            // eslint-disable-next-line no-alert
-            alert('Please select at least one seat.');
+            toast.error('Please select at least one seat.');
             return;
         }
         if (!token) {
-            // eslint-disable-next-line no-alert
-            alert('Please login to continue booking');
+            toast.error('Please login to continue booking');
             navigate('/login');
             return;
         }

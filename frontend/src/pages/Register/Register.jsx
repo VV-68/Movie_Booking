@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { registerUser } from '../../services/api';
 
 const Register = () => {
@@ -26,12 +27,10 @@ const Register = () => {
             const response = await registerUser(payload);
             if (response.data && response.data.token) {
                 // Optionally log the user in immediately; for now, redirect to login
-                // eslint-disable-next-line no-alert
-                alert('Registration Successful!');
+                toast.success('Registration Successful!');
                 navigate('/login');
             } else {
-                // eslint-disable-next-line no-alert
-                alert('Registration Successful!');
+                toast.success('Registration Successful!');
                 navigate('/login');
             }
         } catch (err) {

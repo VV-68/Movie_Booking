@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { createMovie } from '../../services/api';
 
 const AdminCreateMovie = () => {
@@ -37,8 +38,7 @@ const AdminCreateMovie = () => {
                 duration: Number(form.duration),
             };
             await createMovie(payload);
-            // eslint-disable-next-line no-alert
-            alert('Movie created successfully');
+            toast.success('Movie created successfully');
             navigate('/admin/my-movies');
         } catch (err) {
             setError('Failed to create movie');

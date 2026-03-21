@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { loginUser } from '../../services/api';
 import useAuth from '../../hooks/useAuth';
 
@@ -8,13 +9,11 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError('');
         try {
             const response = await loginUser({ email, password });
             const { token, user } = response.data || {};
@@ -23,6 +22,7 @@ const Login = () => {
                 // eslint-disable-next-line no-console
                 console.log('Logged user:', user);
                 login(token, user);
+                toast.success('Login successful!');
                 if (user.role === 'admin') {
                     localStorage.setItem('adminUser', JSON.stringify(user));
                     navigate('/admin/dashboard');
@@ -30,10 +30,10 @@ const Login = () => {
                     navigate('/');
                 }
             } else {
-                setError('Unexpected response from server');
+                toast.error('Unexpected response from server');
             }
         } catch (err) {
-            setError('Invalid email or password');
+            toast.error(err.response?.data?.message || 'Invalid email or password');
         } finally {
             setLoading(false);
         }
@@ -55,7 +55,7 @@ const Login = () => {
                 <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Welcome Back</h2>
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                    {error && <div style={{ color: '#dc3545', background: '#f8d7da', padding: '0.8rem', borderRadius: '4px', textAlign: 'center' }}>{error}</div>}
+                    {/* Error display replaced by toast notification */}
 
                     <div>
                         <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555', fontWeight: '500' }}>Email Address</label>

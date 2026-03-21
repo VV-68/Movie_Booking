@@ -1,0 +1,167 @@
+.ticket-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.ticket-modal {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ticket-header {
+    background: #e50914;
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
+
+.ticket-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-info {
+    padding: 2rem;
+    background: #fdfdfd;
+    border-bottom: 2px dashed #ddd;
+    position: relative;
+}
+
+.ticket-info::before, .ticket-info::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 20px;
+    height: 20px;
+    background: #333; /* Matches the overlay approx or could be transparent */
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 999px rgba(0,0,0,0.7); /* Match overlay */
+}
+
+.ticket-info::before {
+    left: -10px;
+}
+
+.ticket-info::after {
+    right: -10px;
+}
+
+.info-group {
+    margin-bottom: 1.5rem;
+}
+
+.info-group:last-child {
+    margin-bottom: 0;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.info-row .info-group {
+    margin-bottom: 0;
+}
+
+.info-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.info-group p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #222;
+    font-weight: 500;
+}
+
+.info-group .sub-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+.seats-highlight {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: #e50914 !important;
+}
+
+.ticket-stub {
+    background: #f4f4f4;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amount-highlight {
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    color: #28a745 !important;
+}
+
+.barcode-mock {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: #222;
+    margin-bottom: 0.5rem;
+}
+
+.booking-id {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #777;
+    text-align: right;
+}

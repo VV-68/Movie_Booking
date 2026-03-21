@@ -4,7 +4,6 @@ import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/Loader/Loader';
 import { useNavigate } from "react-router-dom";
 const Profile = () => {
-    const { logout } = useAuth();
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -23,11 +22,6 @@ const Profile = () => {
 
         fetchProfile();
     }, []);
-
-    const handleLogout = () => {
-        logout();
-        navigate('/');
-    };
 
     if (loading) return <Loader />;
 
@@ -61,23 +55,6 @@ const Profile = () => {
                             <strong style={{ color: '#555' }}>Location:</strong>
                             <p style={{ margin: '0.4rem 0 0 0', fontSize: '1.1rem', color: '#222' }}>{profile?.location}</p>
                         </div>
-
-                        <button 
-                            onClick={handleLogout}
-                            style={{ 
-                                marginTop: '1.5rem', 
-                                padding: '0.8rem', 
-                                background: '#dc3545', 
-                                color: '#fff', 
-                                border: 'none', 
-                                borderRadius: '4px', 
-                                cursor: 'pointer',
-                                fontSize: '1.1rem',
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            Logout
-                        </button>
                     </div>
                 )}
             </div>

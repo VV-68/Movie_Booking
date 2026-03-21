@@ -1,7 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const AdminNavbar = () => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     const navStyle = {
         background: '#333',
@@ -35,6 +43,12 @@ const AdminNavbar = () => {
                 <Link to="/admin/my-shows" style={linkStyle}>My Shows</Link>
                 <Link to="/admin/my-bookings" style={linkStyle}>My Bookings</Link>
                 <Link to="/admin/profile" style={linkStyle}>Profile</Link>
+                <button
+                    onClick={handleLogout}
+                    style={{ ...linkStyle, background: 'transparent', border: 'none', cursor: 'pointer', outline: 'none', padding: 0 }}
+                >
+                    Logout
+                </button>
             </div>
         </nav>
     );
