@@ -79,7 +79,7 @@ const MyBookings = () => {
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
                                         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.9))', padding: '1.5rem 1rem 0.5rem' }}>
-                                            <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{movie.title || 'Unknown Movie'}</h3>
+                                            <h3 className="movie-overlay-title" style={{ margin: 0, fontSize: '1.4rem', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{movie.title || 'Unknown Movie'}</h3>
                                         </div>
                                     </div>
                                 )}

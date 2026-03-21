@@ -103,7 +103,7 @@ const AdminSeatSelection = () => {
             }}>
 
                 <div style={{ marginBottom: '3rem' }}>
-                    <div style={{
+                    <div className="screen-display" style={{
                         height: '10px',
                         background: 'rgba(255,255,255,0.2)',
                         borderRadius: '10px 10px 0 0',
