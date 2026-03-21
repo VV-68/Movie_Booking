@@ -88,7 +88,7 @@ const AdminMyMovies = () => {
 
     if (loading) {
         return (
-            <div className="container" style={{ padding: '3rem 1rem', textAlign: 'center' }}>
+            <div className="container" style={{ padding: '3rem 1rem', textAlign: 'center', color: '#fff' }}>
                 Loading...
             </div>
         );
@@ -96,22 +96,21 @@ const AdminMyMovies = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem' }}>
-            <h2 style={{ marginBottom: '2rem', color: '#222' }}>My Movies</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <h2 style={{ marginBottom: '2rem', color: '#fff' }}>My Movies</h2>
+            {error && <p style={{ color: '#ffb3c1' }}>{error}</p>}
             {movies.length === 0 ? (
-                <p>No movies created yet.</p>
+                <p style={{ color: '#ccc' }}>No movies created yet.</p>
             ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
                     {movies.map((movie) => (
                         <div
                             key={movie._id}
+                            className="card"
                             style={{
-                                padding: '1rem',
-                                borderRadius: '8px',
-                                border: '1px solid #ddd',
+                                padding: '1.5rem',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '0.5rem',
+                                gap: '0.8rem',
                             }}
                         >
                             {editingId === movie._id ? (
@@ -120,38 +119,39 @@ const AdminMyMovies = () => {
                                         name="title"
                                         value={editForm.title}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        className="form-group"
+                                        style={{ marginBottom: '0.5rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <textarea
                                         name="description"
                                         value={editForm.description}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '0.5rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <input
                                         name="poster"
                                         value={editForm.poster}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '0.5rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <input
                                         name="language"
                                         value={editForm.language}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '0.5rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <input
                                         name="duration"
                                         type="number"
                                         value={editForm.duration}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '0.5rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <input
                                         name="genre"
                                         value={editForm.genre}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '1rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                                         <button
@@ -172,9 +172,10 @@ const AdminMyMovies = () => {
                                 </>
                             ) : (
                                 <>
-                                    <h3 style={{ margin: 0 }}>{movie.title}</h3>
-                                    <p style={{ margin: 0, color: '#666' }}>{movie.language} • {movie.genre}</p>
-                                    <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
+                                    <h3 style={{ margin: '0 0 0.5rem 0', color: '#fff', fontSize: '1.4rem' }}>{movie.title}</h3>
+                                    <p style={{ margin: 0, color: '#ccc', fontSize: '0.9rem' }}>{movie.language} • {movie.genre}</p>
+                                    <p style={{ margin: 0, color: '#999', fontSize: '0.85rem' }}>{movie.duration} min</p>
+                                    <div style={{ marginTop: 'auto', paddingTop: '1rem', display: 'flex', gap: '0.8rem' }}>
                                         <button
                                             type="button"
                                             className="btn btn-primary"

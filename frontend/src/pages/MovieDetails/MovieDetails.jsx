@@ -60,14 +60,11 @@ const MovieDetails = () => {
     return (
         <div className="container" style={{ padding: '3rem 1rem' }}>
             <div
-                className="movie-details-layout"
+                className="card movie-details-layout"
                 style={{
                     display: 'flex',
                     gap: '3rem',
-                    background: '#fff',
                     padding: '2rem',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                 }}
             >
                 <div style={{ width: '300px', flexShrink: 0 }}>
@@ -83,21 +80,21 @@ const MovieDetails = () => {
                 </div>
 
                 <div style={{ flexGrow: 1 }}>
-                    <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
+                    <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
                         {movie.title}
                     </h1>
 
-                    <p style={{ color: '#666', marginBottom: '1rem' }}>
+                    <p style={{ color: '#ccc', marginBottom: '1rem', fontSize: '1.1rem' }}>
                         {movie.language} • {movie.duration} • {movie.genre}
                     </p>
 
-                    <p style={{ marginBottom: '2rem', lineHeight: '1.6' }}>
+                    <p style={{ marginBottom: '2rem', lineHeight: '1.6', color: '#f0f0f0', fontSize: '1.05rem' }}>
                         {movie.description}
                     </p>
 
-                    <hr style={{ margin: '2rem 0' }} />
+                    <hr style={{ margin: '2rem 0', borderColor: 'rgba(255,255,255,0.1)' }} />
 
-                    <h2 style={{ marginBottom: '1.5rem' }}>Available Showtimes</h2>
+                    <h2 style={{ marginBottom: '1.5rem', color: '#fff' }}>Available Showtimes</h2>
 
                     {Object.keys(groupedTimes).length === 0 && (
                         <p>No showtimes available.</p>
@@ -105,7 +102,7 @@ const MovieDetails = () => {
 
                     {Object.keys(groupedTimes).map((theatre) => (
                         <div key={theatre} style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ marginBottom: '1rem' }}>
+                            <h3 style={{ marginBottom: '1rem', color: '#e50914' }}>
                                 🎬 {theatre}
                             </h3>
 
@@ -116,12 +113,21 @@ const MovieDetails = () => {
                                         onClick={() => navigate(`/seats/${show._id}`)}
                                         style={{
                                             padding: '0.6rem 1.2rem',
-                                            background: '#fff',
-                                            color: '#28a745',
-                                            border: '1px solid #28a745',
-                                            borderRadius: '6px',
+                                            background: 'rgba(229, 9, 20, 0.1)',
+                                            color: '#ffb3c1',
+                                            border: '1px solid rgba(229, 9, 20, 0.3)',
+                                            borderRadius: '8px',
                                             cursor: 'pointer',
-                                            fontWeight: '600',
+                                            fontWeight: 'bold',
+                                            transition: 'all 0.3s ease',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.target.style.background = 'rgba(229, 9, 20, 0.2)';
+                                            e.target.style.transform = 'translateY(-2px)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.target.style.background = 'rgba(229, 9, 20, 0.1)';
+                                            e.target.style.transform = 'none';
                                         }}
                                     >
                                         {new Date(show.showTime).toLocaleTimeString([], {

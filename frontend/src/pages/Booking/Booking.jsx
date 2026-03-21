@@ -15,7 +15,7 @@ const Booking = () => {
     if (!location.state) {
         return (
             <div className="container" style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-                <h2 style={{ color: '#222', marginBottom: '1rem' }}>No Booking Details Found</h2>
+                <h2 style={{ color: '#fff', marginBottom: '1rem' }}>No Booking Details Found</h2>
                 <button
                     className="btn btn-primary"
                     type="button"
@@ -40,32 +40,32 @@ const Booking = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem', maxWidth: '600px' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Booking Summary</h2>
+            <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#fff' }}>Booking Summary</h2>
 
             <div className="card" style={{ padding: '2.5rem' }}>
-                <h3 style={{ marginBottom: '1.5rem', color: '#e50914', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>
+                <h3 style={{ marginBottom: '1.5rem', color: '#e50914', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
                     Order Details
                 </h3>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#444' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#ccc' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontWeight: '600' }}>Show ID:</span>
-                        <span>{showId}</span>
+                        <span style={{ fontWeight: '600', color: '#999' }}>Show ID:</span>
+                        <span style={{ color: '#fff' }}>{showId}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontWeight: '600' }}>Selected Seats:</span>
-                        <span>{selectedSeats.join(', ')}</span>
+                        <span style={{ fontWeight: '600', color: '#999' }}>Selected Seats:</span>
+                        <span style={{ color: '#fff' }}>{selectedSeats.join(', ')}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontWeight: '600' }}>Total Seats:</span>
-                        <span>{selectedSeats.length} Ticket(s)</span>
+                        <span style={{ fontWeight: '600', color: '#999' }}>Total Seats:</span>
+                        <span style={{ color: '#fff' }}>{selectedSeats.length} Ticket(s)</span>
                     </div>
 
-                    <hr style={{ border: 'none', borderTop: '1px dashed #ccc', margin: '1rem 0' }} />
+                    <hr style={{ border: 'none', borderTop: '1px dashed rgba(255,255,255,0.2)', margin: '1rem 0' }} />
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#222' }}>Amount Payable</span>
-                        <span style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#e50914' }}>₹{totalPrice}</span>
+                        <span style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#fff' }}>Amount Payable</span>
+                        <span style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#28a745', textShadow: '0 0 10px rgba(40,167,69,0.3)' }}>₹{totalPrice}</span>
                     </div>
                 </div>
 

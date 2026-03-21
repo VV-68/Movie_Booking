@@ -39,58 +39,42 @@ const Login = () => {
         }
     };
 
-    const inputStyle = {
-        width: '100%',
-        padding: '0.8rem 1rem',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        fontSize: '1rem',
-        outline: 'none',
-        transition: 'border-color 0.2s'
-    };
-
     return (
-        <div className="container" style={{ padding: '4rem 1rem', maxWidth: '450px' }}>
-            <div className="card" style={{ padding: '2.5rem' }}>
-                <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Welcome Back</h2>
+        <div className="form-container">
+            <div className="card form-card">
+                <h2 className="text-center" style={{ marginBottom: '2rem' }}>Welcome Back</h2>
 
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                <form onSubmit={handleSubmit}>
                     {/* Error display replaced by toast notification */}
 
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555', fontWeight: '500' }}>Email Address</label>
+                    <div className="form-group">
+                        <label>Email Address</label>
                         <input
                             type="email"
                             placeholder="Enter your email"
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            style={inputStyle}
-                            onFocus={(e) => e.target.style.borderColor = '#e50914'}
-                            onBlur={(e) => e.target.style.borderColor = '#ccc'}
                         />
                     </div>
 
-                    <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', color: '#555', fontWeight: '500' }}>Password</label>
+                    <div className="form-group">
+                        <label>Password</label>
                         <input
                             type="password"
                             placeholder="Enter your password"
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            style={inputStyle}
-                            onFocus={(e) => e.target.style.borderColor = '#e50914'}
-                            onBlur={(e) => e.target.style.borderColor = '#ccc'}
                         />
                     </div>
 
-                    <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', padding: '0.8rem', marginTop: '1rem' }}>
+                    <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
                         {loading ? 'Logging in...' : 'Login'}
                     </button>
 
-                    <p style={{ textAlign: 'center', marginTop: '1rem', color: '#666', fontSize: '0.9rem' }}>
-                        New to Movie Booking? <Link to="/register" style={{ color: '#e50914', textDecoration: 'none', fontWeight: 'bold' }}>Register here</Link>
+                    <p style={{ textAlign: 'center', marginTop: '1.5rem', color: '#aaa', fontSize: '0.95rem' }}>
+                        New to Movie Booking? <Link to="/register" className="form-link">Register here</Link>
                     </p>
                 </form>
             </div>

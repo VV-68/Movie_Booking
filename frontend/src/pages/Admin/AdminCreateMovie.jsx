@@ -47,88 +47,79 @@ const AdminCreateMovie = () => {
         }
     };
 
-    const inputStyle = {
-        width: '100%',
-        padding: '0.7rem 1rem',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        fontSize: '1rem',
-        outline: 'none',
-        transition: 'border-color 0.2s',
-    };
-
     return (
-        <div className="container" style={{ padding: '3rem 1rem', maxWidth: '700px' }}>
-            <button 
-                onClick={() => navigate("/admin/dashboard")} 
-                style={{ marginBottom: '1rem', padding: '0.5rem 1rem', background: '#6c757d', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-            >
-                Back to Dashboard
-            </button>
-            <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Create Movie</h2>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                {error && (
-                    <div
-                        style={{
-                            color: '#dc3545',
-                            background: '#f8d7da',
-                            padding: '0.8rem',
-                            borderRadius: '4px',
-                            textAlign: 'center',
-                        }}
-                    >
-                        {error}
+        <div className="form-container">
+            <div className="card form-card" style={{ maxWidth: '600px' }}>
+                <button 
+                    onClick={() => navigate("/admin/dashboard")} 
+                    className="btn"
+                    style={{ marginBottom: '1.5rem', padding: '0.6rem 1.2rem', background: 'rgba(255,255,255,0.1)' }}
+                >
+                    &larr; Back to Dashboard
+                </button>
+                <h2 className="text-center" style={{ marginBottom: '2rem' }}>Create Movie</h2>
+
+                <form onSubmit={handleSubmit}>
+                    {error && (
+                        <div style={{ color: '#ffb3c1', background: 'rgba(229, 9, 20, 0.1)', padding: '0.8rem', borderRadius: '8px', textAlign: 'center', marginBottom: '1.5rem', border: '1px solid rgba(229,9,20,0.3)' }}>
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="form-group">
+                        <label>Title</label>
+                        <input name="title" value={form.title} onChange={handleChange} required />
                     </div>
-                )}
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Title</label>
-                    <input name="title" value={form.title} onChange={handleChange} required style={inputStyle} />
-                </div>
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Description</label>
-                    <textarea
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                        required
-                        style={{ ...inputStyle, height: '100px', resize: 'vertical' }}
-                    />
-                </div>
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Poster URL</label>
-                    <input name="poster" value={form.poster} onChange={handleChange} required style={inputStyle} />
-                </div>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '0.4rem' }}>Language</label>
-                        <input name="language" value={form.language} onChange={handleChange} required style={inputStyle} />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '0.4rem' }}>Duration (minutes)</label>
-                        <input
-                            name="duration"
-                            type="number"
-                            min="1"
-                            value={form.duration}
+
+                    <div className="form-group">
+                        <label>Description</label>
+                        <textarea
+                            name="description"
+                            value={form.description}
                             onChange={handleChange}
                             required
-                            style={inputStyle}
+                            style={{ height: '100px', resize: 'vertical' }}
                         />
                     </div>
-                </div>
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Genre</label>
-                    <input name="genre" value={form.genre} onChange={handleChange} required style={inputStyle} />
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={loading}
-                    style={{ marginTop: '1rem', padding: '0.9rem', fontSize: '1rem' }}
-                >
-                    {loading ? 'Creating...' : 'Create Movie'}
-                </button>
-            </form>
+
+                    <div className="form-group">
+                        <label>Poster URL</label>
+                        <input name="poster" value={form.poster} onChange={handleChange} required />
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '1rem' }}>
+                        <div className="form-group" style={{ flex: 1 }}>
+                            <label>Language</label>
+                            <input name="language" value={form.language} onChange={handleChange} required />
+                        </div>
+                        <div className="form-group" style={{ flex: 1 }}>
+                            <label>Duration (minutes)</label>
+                            <input
+                                name="duration"
+                                type="number"
+                                min="1"
+                                value={form.duration}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Genre</label>
+                        <input name="genre" value={form.genre} onChange={handleChange} required />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={loading}
+                        style={{ width: '100%', marginTop: '1rem' }}
+                    >
+                        {loading ? 'Creating...' : 'Create Movie'}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

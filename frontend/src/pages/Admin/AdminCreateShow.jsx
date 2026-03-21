@@ -62,175 +62,161 @@ const AdminCreateShow = () => {
         }
     };
 
-    const inputStyle = {
-        width: '100%',
-        padding: '0.7rem 1rem',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        fontSize: '1rem',
-        outline: 'none',
-        transition: 'border-color 0.2s',
-    };
-
     return (
-        <div className="container" style={{ padding: '3rem 1rem', maxWidth: '700px' }}>
-            <button 
-                onClick={() => navigate("/admin/dashboard")} 
-                style={{ marginBottom: '1rem', padding: '0.5rem 1rem', background: '#6c757d', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-            >
-                Back to Dashboard
-            </button>
-            <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>Create Show</h2>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                {error && (
-                    <div
-                        style={{
-                            color: '#dc3545',
-                            background: '#f8d7da',
-                            padding: '0.8rem',
-                            borderRadius: '4px',
-                            textAlign: 'center',
-                        }}
-                    >
-                        {error}
-                    </div>
-                )}
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Movie</label>
-                    <select
-                        name="movieId"
-                        value={form.movieId}
-                        onChange={handleChange}
-                        required
-                        style={inputStyle}
-                    >
-                        <option value="">Select a movie</option>
-                        {movies.map((movie) => (
-                            <option key={movie._id} value={movie._id}>
-                                {movie.title}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Show Time</label>
-                    <input
-                        type="datetime-local"
-                        name="showTime"
-                        value={form.showTime}
-                        onChange={handleChange}
-                        required
-                        style={inputStyle}
-                    />
-                </div>
-                <div>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Price</label>
-                    <input
-                        type="number"
-                        name="price"
-                        min="1"
-                        value={form.price}
-                        onChange={handleChange}
-                        required
-                        style={inputStyle}
-                    />
-                </div>
-
-                <div style={{ padding: '1.5rem', border: '1px solid #ddd', borderRadius: '8px', background: '#f9f9f9', marginTop: '1rem' }}>
-                    <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.2rem', color: '#444' }}>Seat Layout</h3>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
-                        <div style={{ flex: 1 }}>
-                            <label style={{ display: 'block', marginBottom: '0.4rem' }}>Number of Rows (Max 26)</label>
-                            <input
-                                type="number"
-                                name="totalRows"
-                                min="1"
-                                max="26"
-                                value={form.totalRows}
-                                onChange={handleChange}
-                                required
-                                style={inputStyle}
-                            />
-                        </div>
-                        <div style={{ flex: 1 }}>
-                            <label style={{ display: 'block', marginBottom: '0.4rem' }}>Seats per Row</label>
-                            <input
-                                type="number"
-                                name="seatsPerRow"
-                                min="1"
-                                value={form.seatsPerRow}
-                                onChange={handleChange}
-                                required
-                                style={inputStyle}
-                            />
-                        </div>
-                    </div>
-
-                    <div style={{ marginTop: '2rem' }}>
-                        <h4 style={{ margin: '0 0 1rem 0', color: '#666', fontSize: '1rem' }}>Live Preview</h4>
-                        <div style={{
-                            width: '100%',
-                            height: '6px',
-                            background: '#ccc',
-                            borderRadius: '4px',
-                            marginBottom: '1rem',
-                            textAlign: 'center',
-                            position: 'relative'
-                        }}>
-                             <span style={{ position: 'absolute', top: '10px', left: '50%', transform: 'translateX(-50%)', fontSize: '0.7rem', color: '#999', letterSpacing: '1px' }}>SCREEN</span>
-                        </div>
-                        
-                        <div style={{ 
-                            marginTop: '2rem',
-                            display: 'flex', 
-                            flexDirection: 'column', 
-                            gap: '0.4rem', 
-                            alignItems: 'center',
-                            overflowX: 'auto',
-                            paddingBottom: '1rem'
-                        }}>
-                            {Array.from({ length: Math.min(Number(form.totalRows) || 0, 26) }).map((_, rIndex) => {
-                                const rowLabel = String.fromCharCode(65 + rIndex);
-                                return (
-                                    <div key={rowLabel} style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
-                                        <span style={{ width: '20px', fontWeight: 'bold', fontSize: '0.8rem', color: '#555', textAlign: 'right', marginRight: '0.5rem' }}>{rowLabel}</span>
-                                        <div style={{ display: 'flex', gap: '0.3rem' }}>
-                                            {Array.from({ length: Number(form.seatsPerRow) || 0 }).map((_, sIndex) => (
-                                                <div 
-                                                    key={`${rowLabel}${sIndex + 1}`}
-                                                    title={`${rowLabel}${sIndex + 1}`}
-                                                    style={{ 
-                                                        width: '24px', 
-                                                        height: '24px', 
-                                                        background: '#fff', 
-                                                        border: '1px solid #28a745',
-                                                        borderRadius: '4px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        fontSize: '0.6rem',
-                                                        color: '#333'
-                                                    }}
-                                                >
-                                                    {sIndex + 1}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={loading}
-                    style={{ marginTop: '1rem', padding: '0.9rem', fontSize: '1rem' }}
+        <div className="form-container">
+            <div className="card form-card" style={{ maxWidth: '650px' }}>
+                <button 
+                    onClick={() => navigate("/admin/dashboard")} 
+                    className="btn"
+                    style={{ marginBottom: '1.5rem', padding: '0.6rem 1.2rem', background: 'rgba(255,255,255,0.1)' }}
                 >
-                    {loading ? 'Creating...' : 'Create Show'}
+                    &larr; Back to Dashboard
                 </button>
-            </form>
+                <h2 className="text-center" style={{ marginBottom: '2rem' }}>Create Show</h2>
+
+                <form onSubmit={handleSubmit}>
+                    {error && (
+                        <div style={{ color: '#ffb3c1', background: 'rgba(229, 9, 20, 0.1)', padding: '0.8rem', borderRadius: '8px', textAlign: 'center', marginBottom: '1.5rem', border: '1px solid rgba(229,9,20,0.3)' }}>
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="form-group">
+                        <label>Movie</label>
+                        <select
+                            name="movieId"
+                            value={form.movieId}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="" style={{ color: '#000' }}>Select a movie</option>
+                            {movies.map((movie) => (
+                                <option key={movie._id} value={movie._id} style={{ color: '#000' }}>
+                                    {movie.title}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Show Time</label>
+                        <input
+                            type="datetime-local"
+                            name="showTime"
+                            value={form.showTime}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Price</label>
+                        <input
+                            type="number"
+                            name="price"
+                            min="1"
+                            value={form.price}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div style={{ padding: '1.5rem', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', background: 'rgba(0,0,0,0.2)', marginTop: '2rem' }}>
+                        <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.2rem', color: '#fff' }}>Seat Layout</h3>
+                        
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                            <div className="form-group" style={{ flex: 1 }}>
+                                <label>Rows (Max 26)</label>
+                                <input
+                                    type="number"
+                                    name="totalRows"
+                                    min="1"
+                                    max="26"
+                                    value={form.totalRows}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group" style={{ flex: 1 }}>
+                                <label>Seats per Row</label>
+                                <input
+                                    type="number"
+                                    name="seatsPerRow"
+                                    min="1"
+                                    value={form.seatsPerRow}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{ marginTop: '2rem' }}>
+                            <h4 style={{ margin: '0 0 1rem 0', color: '#aaa', fontSize: '1rem', textAlign: 'center' }}>Live Preview</h4>
+                            <div style={{
+                                width: '100%',
+                                height: '6px',
+                                background: 'rgba(255,255,255,0.3)',
+                                borderRadius: '4px',
+                                marginBottom: '1.5rem',
+                                position: 'relative'
+                            }}>
+                                 <span style={{ position: 'absolute', top: '12px', left: '50%', transform: 'translateX(-50%)', fontSize: '0.75rem', color: '#777', letterSpacing: '2px' }}>SCREEN</span>
+                            </div>
+                            
+                            <div style={{ 
+                                marginTop: '2.5rem',
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                gap: '0.5rem', 
+                                alignItems: 'center',
+                                overflowX: 'auto',
+                                paddingBottom: '1rem'
+                            }}>
+                                {Array.from({ length: Math.min(Number(form.totalRows) || 0, 26) }).map((_, rIndex) => {
+                                    const rowLabel = String.fromCharCode(65 + rIndex);
+                                    return (
+                                        <div key={rowLabel} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                            <span style={{ width: '20px', fontWeight: 'bold', fontSize: '0.85rem', color: '#888', textAlign: 'right', marginRight: '0.5rem' }}>{rowLabel}</span>
+                                            <div style={{ display: 'flex', gap: '0.35rem' }}>
+                                                {Array.from({ length: Number(form.seatsPerRow) || 0 }).map((_, sIndex) => (
+                                                    <div 
+                                                        key={`${rowLabel}${sIndex + 1}`}
+                                                        title={`${rowLabel}${sIndex + 1}`}
+                                                        style={{ 
+                                                            width: '26px', 
+                                                            height: '26px', 
+                                                            background: 'rgba(255,255,255,0.8)', 
+                                                            borderRadius: '6px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            fontSize: '0.65rem',
+                                                            fontWeight: 'bold',
+                                                            color: '#111',
+                                                            boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+                                                        }}
+                                                    >
+                                                        {sIndex + 1}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={loading}
+                        style={{ width: '100%', marginTop: '2rem' }}
+                    >
+                        {loading ? 'Creating...' : 'Create Show'}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

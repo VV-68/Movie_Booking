@@ -101,24 +101,30 @@ const Home = () => {
 
     // --- Styling definitions ---
     const panelStyle = {
-        background: '#fff',
+        background: 'rgba(255,255,255,0.05)',
+        backdropFilter: 'blur(10px)',
+        border: '1px solid rgba(255,255,255,0.1)',
         padding: '1.5rem',
-        borderRadius: '8px',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+        borderRadius: '12px',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
         marginBottom: '2rem',
         display: 'flex',
         flexDirection: 'column',
         gap: '1.2rem',
+        overflow: 'visible',
+        position: 'relative',
+        zIndex: 50,
     };
 
     const searchInputStyle = {
         padding: '0.8rem 1.2rem',
-        borderRadius: '4px',
-        border: '1px solid #ddd',
+        borderRadius: '8px',
+        border: '1px solid rgba(255,255,255,0.2)',
         fontSize: '1rem',
         width: '100%',
         outline: 'none',
-        background: '#f8f9fa'
+        background: 'rgba(0,0,0,0.2)',
+        color: '#fff'
     };
 
     const filtersRowStyle = {
@@ -135,20 +141,9 @@ const Home = () => {
         flex: '1 1 200px', // allow wrapping on mobile
     };
 
-    const selectStyle = {
-        padding: '0.6rem',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        fontSize: '0.95rem',
-        width: '100%',
-        outline: 'none',
-        cursor: 'pointer',
-        background: '#fff',
-    };
-
     const labelStyle = {
         fontWeight: 'bold',
-        color: '#444',
+        color: '#ccc',
         fontSize: '0.9rem',
         minWidth: '75px'
     };
@@ -191,36 +186,37 @@ const Home = () => {
                 <div style={filtersRowStyle}>
                     
                     {/* Location Custom Dropdown */}
-                    <div style={{...filterGroupStyle, position: 'relative'}}>
+                    <div style={{...filterGroupStyle, position: 'relative', zIndex: 1000}}>
                         <span style={labelStyle}>Location:</span>
                         <div style={{width: '100%', position: 'relative'}}>
                             <div 
+                                className="custom-select"
                                 onClick={() => setIsLocationDropdownOpen(!isLocationDropdownOpen)}
                                 style={{
-                                    ...selectStyle,
                                     display: 'flex', 
                                     justifyContent: 'space-between',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    width: '100%'
                                 }}
                             >
                                 <span>{selectedLocation || 'Select Location'}</span>
-                                <span style={{fontSize: '0.8rem'}}>▼</span>
                             </div>
 
                             {isLocationDropdownOpen && (
-                                <div style={{
+                                <div className="custom-dropdown-menu" style={{
                                     position: 'absolute',
                                     top: '100%',
                                     left: 0,
                                     right: 0,
-                                    background: '#fff',
-                                    border: '1px solid #ccc',
-                                    borderRadius: '4px',
+                                    background: '#1a1a1a',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    borderRadius: '8px',
                                     marginTop: '4px',
-                                    zIndex: 100,
-                                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                                    zIndex: 10000,
+                                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                                    color: '#fff'
                                 }}>
-                                    <div style={{padding: '0.5rem', borderBottom: '1px solid #eee'}}>
+                                    <div style={{padding: '0.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)'}}>
                                         <input 
                                             type="text" 
                                             placeholder="Search location..."
@@ -229,10 +225,12 @@ const Home = () => {
                                             style={{
                                                 width: '100%',
                                                 padding: '0.5rem',
-                                                border: '1px solid #ddd',
+                                                border: '1px solid rgba(255,255,255,0.2)',
                                                 borderRadius: '4px',
                                                 outline: 'none',
-                                                fontSize: '0.9rem'
+                                                fontSize: '0.9rem',
+                                                background: 'rgba(0,0,0,0.3)',
+                                                color: '#fff'
                                             }}
                                         />
                                     </div>
@@ -245,11 +243,11 @@ const Home = () => {
                                                     style={{
                                                         padding: '0.6rem 1rem',
                                                         cursor: 'pointer',
-                                                        background: selectedLocation === loc ? '#f0f0f0' : 'transparent',
-                                                        borderBottom: '1px solid #eee'
+                                                        background: selectedLocation === loc ? 'rgba(255,255,255,0.1)' : 'transparent',
+                                                        borderBottom: '1px solid rgba(255,255,255,0.05)'
                                                     }}
-                                                    onMouseEnter={(e) => e.target.style.background = '#f8f9fa'}
-                                                    onMouseLeave={(e) => e.target.style.background = selectedLocation === loc ? '#f0f0f0' : 'transparent'}
+                                                    onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
+                                                    onMouseLeave={(e) => e.target.style.background = selectedLocation === loc ? 'rgba(255,255,255,0.1)' : 'transparent'}
                                                 >
                                                     {loc}
                                                 </div>
@@ -269,7 +267,7 @@ const Home = () => {
                         <select 
                             value={selectedGenre}
                             onChange={(e) => setSelectedGenre(e.target.value)}
-                            style={selectStyle}
+                            style={{width: '100%'}}
                         >
                             {genres.map(g => <option key={g} value={g}>{g === 'All' ? 'Select Genre' : g}</option>)}
                         </select>
@@ -281,7 +279,7 @@ const Home = () => {
                         <select 
                             value={selectedLanguage}
                             onChange={(e) => setSelectedLanguage(e.target.value)}
-                            style={selectStyle}
+                            style={{width: '100%'}}
                         >
                             {languages.map(l => <option key={l} value={l}>{l === 'All' ? 'Select Language' : l}</option>)}
                         </select>
@@ -298,10 +296,10 @@ const Home = () => {
             {loading ? (
                 <Loader />
             ) : filteredMovies.length === 0 ? (
-                <p>No movies matched your search criteria.</p>
+                <p style={{ color: '#ccc' }}>No movies matched your search criteria.</p>
             ) : (
                 <>
-                    <h2 style={{ marginBottom: '1.5rem', color: '#222', fontSize: '1.5rem' }}>
+                    <h2 style={{ marginBottom: '1.5rem', color: '#fff', fontSize: '1.5rem' }}>
                         {selectedLocation ? `Movies in ${selectedLocation}` : 'Recommended Movies'}
                     </h2>
                     <div

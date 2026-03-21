@@ -42,11 +42,11 @@ const MyBookings = () => {
     if (loading) return <Loader />;
 
     return (
-        <div className="container" style={{ padding: '2rem 1rem' }}>
-            <h2 style={{ marginBottom: '2rem', color: '#222', fontSize: '1.8rem' }}>My Bookings</h2>
+        <div className="container" style={{ padding: '3rem 1rem' }}>
+            <h2 style={{ marginBottom: '2rem', color: '#fff', fontSize: '2rem' }}>My Bookings</h2>
 
             {bookings.length === 0 ? (
-                <p>You have no bookings yet.</p>
+                <p style={{ color: '#ccc', fontSize: '1.1rem' }}>You have no bookings yet.</p>
             ) : (
                 <div
                     style={{
@@ -63,70 +63,59 @@ const MyBookings = () => {
                         return (
                             <div
                                 key={booking._id}
+                                className="card"
                                 style={{
-                                    border: '1px solid #eee',
-                                    borderRadius: '8px',
+                                    padding: 0,
                                     overflow: 'hidden',
-                                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    background: '#fff',
                                 }}
                             >
                                 {movie.poster && (
-                                    <img
-                                        src={movie.poster}
-                                        alt={movie.title}
-                                        style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-                                    />
+                                    <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                                        <img
+                                            src={movie.poster}
+                                            alt={movie.title}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        />
+                                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.9))', padding: '1.5rem 1rem 0.5rem' }}>
+                                            <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{movie.title || 'Unknown Movie'}</h3>
+                                        </div>
+                                    </div>
                                 )}
-                                <div style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                    <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#333' }}>{movie.title || 'Unknown Movie'}</h3>
-                                    <p style={{ margin: 0, color: '#555' }}>
-                                        <strong>Theatre:</strong> {theatre.name || 'Unknown Theatre'}, {theatre.location || 'Unknown Location'}
+                                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', flex: 1 }}>
+                                    {!movie.poster && <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#fff' }}>{movie.title || 'Unknown Movie'}</h3>}
+                                    <p style={{ margin: 0, color: '#ccc', fontSize: '0.95rem' }}>
+                                        <strong style={{ color: '#fff' }}>Theatre:</strong> {theatre.name || 'Unknown Theatre'}, {theatre.location || 'Unknown Location'}
                                     </p>
-                                    <p style={{ margin: 0, color: '#555' }}>
-                                        <strong>Show Time:</strong> {new Date(showId?.showTime).toLocaleString()}
+                                    <p style={{ margin: 0, color: '#ccc', fontSize: '0.95rem' }}>
+                                        <strong style={{ color: '#fff' }}>Show Time:</strong> {new Date(showId?.showTime).toLocaleString()}
                                     </p>
-                                    <p style={{ margin: 0, color: '#555' }}>
-                                        <strong>Seats:</strong> {seats.join(', ')}
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <p style={{ margin: 0, color: '#ccc', fontSize: '0.95rem' }}>
+                                            <strong style={{ color: '#fff' }}>Seats:</strong> {seats.join(', ')}
+                                        </p>
+                                        <p style={{ margin: 0, color: '#28a745', fontSize: '1.2rem', fontWeight: 'bold' }}>
+                                            ₹{totalPrice}
+                                        </p>
+                                    </div>
+                                    <p style={{ margin: 'auto 0 0 0', color: '#777', fontSize: '0.8rem', paddingTop: '1rem' }}>
+                                        Booked On: {new Date(bookingTime).toLocaleString()}
                                     </p>
-                                    <p style={{ margin: 0, color: '#555' }}>
-                                        <strong>Total Price:</strong> Rs. {totalPrice}
-                                    </p>
-                                    <p style={{ margin: 0, color: '#777', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-                                        <strong>Booked On:</strong> {new Date(bookingTime).toLocaleString()}
-                                    </p>
-                                    <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                                    <div style={{ display: 'flex', gap: '0.8rem', marginTop: '1rem' }}>
                                         <button 
                                             onClick={() => setSelectedTicket(booking)}
-                                            style={{ 
-                                                flex: 1,
-                                                padding: '0.6rem', 
-                                                background: '#007bff', 
-                                                color: 'white', 
-                                                border: 'none', 
-                                                borderRadius: '4px', 
-                                                cursor: 'pointer',
-                                                fontWeight: 'bold'
-                                            }}
+                                            className="btn btn-primary"
+                                            style={{ flex: 1 }}
                                         >
                                             View Ticket
                                         </button>
                                         <button 
                                             onClick={() => handleCancelBooking(booking._id)}
-                                            style={{ 
-                                                flex: 1,
-                                                padding: '0.6rem', 
-                                                background: '#dc3545', 
-                                                color: 'white', 
-                                                border: 'none', 
-                                                borderRadius: '4px', 
-                                                cursor: 'pointer',
-                                                fontWeight: 'bold'
-                                            }}
+                                            className="btn btn-danger"
+                                            style={{ flex: 1 }}
                                         >
-                                            Cancel Booking
+                                            Cancel
                                         </button>
                                     </div>
                                 </div>

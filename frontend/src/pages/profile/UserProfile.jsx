@@ -29,25 +29,20 @@ const UserProfile = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem', maxWidth: '600px' }}>
-            <div style={{
-                background: '#fff',
-                padding: '2.5rem',
-                borderRadius: '8px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
-                <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#222' }}>My Profile</h2>
+            <div className="card" style={{ padding: '2.5rem' }}>
+                <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#fff' }}>My Profile</h2>
                 
                 {error ? (
                     <div style={{ color: '#dc3545', textAlign: 'center' }}>{error}</div>
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                        <div style={{ borderBottom: '1px solid #eee', paddingBottom: '0.8rem' }}>
-                            <strong style={{ color: '#555' }}>Name:</strong>
-                            <p style={{ margin: '0.4rem 0 0 0', fontSize: '1.1rem', color: '#222' }}>{profile?.name}</p>
+                        <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.8rem' }}>
+                            <strong style={{ color: '#ccc' }}>Name:</strong>
+                            <p style={{ margin: '0.4rem 0 0 0', fontSize: '1.1rem', color: '#fff' }}>{profile?.name}</p>
                         </div>
-                        <div style={{ borderBottom: '1px solid #eee', paddingBottom: '0.8rem' }}>
-                            <strong style={{ color: '#555' }}>Email Address:</strong>
-                            <p style={{ margin: '0.4rem 0 0 0', fontSize: '1.1rem', color: '#222' }}>{profile?.email}</p>
+                        <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.8rem' }}>
+                            <strong style={{ color: '#ccc' }}>Email Address:</strong>
+                            <p style={{ margin: '0.4rem 0 0 0', fontSize: '1.1rem', color: '#fff' }}>{profile?.email}</p>
                         </div>
                     </div>
                 )}

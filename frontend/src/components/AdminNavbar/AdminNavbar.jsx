@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import '../Navbar/Navbar.css';
 
 const AdminNavbar = () => {
     const { logout } = useAuth();
@@ -11,44 +12,23 @@ const AdminNavbar = () => {
         navigate('/login');
     };
 
-    const navStyle = {
-        background: '#333',
-        color: '#fff',
-        padding: '1rem 2rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    };
-
-    const linkContainerStyle = {
-        display: 'flex',
-        gap: '1.5rem',
-        alignItems: 'center',
-    };
-
-    const linkStyle = {
-        color: '#fff',
-        textDecoration: 'none',
-        fontSize: '1rem',
-    };
-
     return (
-        <nav style={navStyle}>
-            <div style={linkContainerStyle}>
-                <Link to="/admin/home" style={linkStyle}>Home</Link>
-                <Link to="/admin/dashboard" style={linkStyle}>Dashboard</Link>
-                <Link to="/admin/create-movie" style={linkStyle}>Create Movie</Link>
-                <Link to="/admin/create-show" style={linkStyle}>Create Show</Link>
-                <Link to="/admin/my-movies" style={linkStyle}>My Movies</Link>
-                <Link to="/admin/my-shows" style={linkStyle}>My Shows</Link>
-                <Link to="/admin/my-bookings" style={linkStyle}>My Bookings</Link>
-                <Link to="/admin/profile" style={linkStyle}>Profile</Link>
-                <button
-                    onClick={handleLogout}
-                    style={{ ...linkStyle, background: 'transparent', border: 'none', cursor: 'pointer', outline: 'none', padding: 0 }}
-                >
-                    Logout
-                </button>
+        <nav className="navbar">
+            <div className="navbar-container">
+                <div className="navbar-brand">
+                    <Link to="/admin/home">Admin Panel</Link>
+                </div>
+                <div className="navbar-links">
+                    <Link to="/admin/home">Home</Link>
+                    <Link to="/admin/dashboard">Dashboard</Link>
+                    <Link to="/admin/create-movie">Create Movie</Link>
+                    <Link to="/admin/create-show">Create Show</Link>
+                    <Link to="/admin/my-movies">Movies</Link>
+                    <Link to="/admin/my-shows">Shows</Link>
+                    <Link to="/admin/my-bookings">Bookings</Link>
+                    <Link className="profile-btn" to="/admin/profile">Profile</Link>
+                    <button className="logout-btn" onClick={handleLogout}>Logout</button>
+                </div>
             </div>
         </nav>
     );

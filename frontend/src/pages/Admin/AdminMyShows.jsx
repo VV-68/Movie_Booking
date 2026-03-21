@@ -89,7 +89,7 @@ const AdminMyShows = () => {
 
     if (loading) {
         return (
-            <div className="container" style={{ padding: '3rem 1rem', textAlign: 'center' }}>
+            <div className="container" style={{ padding: '3rem 1rem', textAlign: 'center', color: '#fff' }}>
                 Loading...
             </div>
         );
@@ -97,22 +97,21 @@ const AdminMyShows = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem' }}>
-            <h2 style={{ marginBottom: '2rem', color: '#222' }}>My Shows</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <h2 style={{ marginBottom: '2rem', color: '#fff' }}>My Shows</h2>
+            {error && <p style={{ color: '#ffb3c1' }}>{error}</p>}
             {shows.length === 0 ? (
-                <p>No shows created yet.</p>
+                <p style={{ color: '#ccc' }}>No shows created yet.</p>
             ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
                     {shows.map((show) => (
                         <div
                             key={show._id}
+                            className="card"
                             style={{
-                                padding: '1rem',
-                                borderRadius: '8px',
-                                border: '1px solid #ddd',
+                                padding: '1.5rem',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '0.5rem',
+                                gap: '0.8rem',
                             }}
                         >
                             {editingId === show._id ? (
@@ -122,14 +121,14 @@ const AdminMyShows = () => {
                                         name="showTime"
                                         value={editForm.showTime}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '0.5rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <input
                                         type="number"
                                         name="price"
                                         value={editForm.price}
                                         onChange={handleEditChange}
-                                        style={{ marginBottom: '0.5rem' }}
+                                        style={{ marginBottom: '1rem', padding: '0.6rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', borderRadius: '4px' }}
                                     />
                                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                                         <button
@@ -150,14 +149,18 @@ const AdminMyShows = () => {
                                 </>
                             ) : (
                                 <>
-                                    <h3 style={{ margin: 0 }}>
+                                    <h3 style={{ margin: '0 0 0.5rem 0', color: '#fff', fontSize: '1.3rem' }}>
                                         {show.movieId && show.movieId.title ? show.movieId.title : 'Show'}
                                     </h3>
-                                    <p style={{ margin: 0, color: '#666' }}>
-                                        {new Date(show.showTime).toLocaleString()} • ₹
-                                        {show.price}
-                                    </p>
-                                    <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <p style={{ margin: 0, color: '#ccc', fontSize: '0.9rem' }}>
+                                            {new Date(show.showTime).toLocaleString()}
+                                        </p>
+                                        <p style={{ margin: 0, color: '#28a745', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                                            ₹{show.price}
+                                        </p>
+                                    </div>
+                                    <div style={{ marginTop: 'auto', paddingTop: '1rem', display: 'flex', gap: '0.8rem' }}>
                                         <button
                                             type="button"
                                             className="btn btn-primary"

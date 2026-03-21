@@ -77,33 +77,30 @@ const SeatSelection = () => {
     if (loading) return <Loader />;
 
     return (
-        <div className="container" style={{ padding: '2rem 1rem', maxWidth: '800px', textAlign: 'center' }}>
-            <h2 style={{ marginBottom: '2rem', color: '#222' }}>Select Your Seats</h2>
+        <div className="container" style={{ padding: '3rem 1rem', maxWidth: '800px', textAlign: 'center', color: '#fff' }}>
+            <h2 style={{ marginBottom: '2rem', color: '#fff' }}>Select Your Seats</h2>
 
-            <div style={{
-                background: '#fff',
+            <div className="card" style={{
                 padding: '3rem 2rem',
-                borderRadius: '12px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                 marginBottom: '2rem'
             }}>
 
                 <div style={{ marginBottom: '3rem' }}>
                     <div style={{
                         height: '10px',
-                        background: '#ccc',
+                        background: 'rgba(255,255,255,0.2)',
                         borderRadius: '10px 10px 0 0',
                         width: '80%',
                         margin: '0 auto',
-                        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                        boxShadow: '0 -4px 15px rgba(255,255,255,0.05)'
                     }}></div>
-                    <p style={{ marginTop: '0.5rem', color: '#888', letterSpacing: '2px', fontSize: '0.9rem', fontWeight: 'bold' }}>SCREEN THIS WAY</p>
+                    <p style={{ marginTop: '0.5rem', color: '#ccc', letterSpacing: '4px', fontSize: '0.8rem', fontWeight: 'bold' }}>SCREEN THIS WAY</p>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', alignItems: 'center' }}>
                     {layout.map((rowObj) => (
                         <div key={rowObj.row} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                            <span style={{ width: '25px', fontWeight: 'bold', color: '#555', textAlign: 'right' }}>{rowObj.row}</span>
+                            <span style={{ width: '25px', fontWeight: 'bold', color: '#ccc', textAlign: 'right' }}>{rowObj.row}</span>
                             <div style={{ display: 'flex', gap: '0.6rem' }}>
                                 {rowObj.seats.map(seat => (
                                     <Seat
@@ -125,41 +122,43 @@ const SeatSelection = () => {
                     justifyContent: 'center',
                     gap: '2rem',
                     padding: '1rem',
-                    background: '#f9f9f9',
+                    background: 'rgba(0,0,0,0.2)',
+                    border: '1px solid rgba(255,255,255,0.05)',
                     borderRadius: '8px'
                 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <div style={{ width: '20px', height: '20px', background: '#28a745', borderRadius: '4px' }}></div>
-                        <span style={{ color: '#555', fontSize: '0.9rem' }}>Available</span>
+                        <div style={{ width: '20px', height: '20px', background: '#e50914', borderRadius: '4px' }}></div>
+                        <span style={{ color: '#ccc', fontSize: '0.9rem' }}>Available</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <div style={{ width: '20px', height: '20px', background: '#dc3545', borderRadius: '4px' }}></div>
-                        <span style={{ color: '#555', fontSize: '0.9rem' }}>Booked</span>
+                        <div style={{ width: '20px', height: '20px', background: '#555', borderRadius: '4px' }}></div>
+                        <span style={{ color: '#ccc', fontSize: '0.9rem' }}>Booked</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <div style={{ width: '20px', height: '20px', background: '#007bff', borderRadius: '4px' }}></div>
-                        <span style={{ color: '#555', fontSize: '0.9rem' }}>Selected</span>
+                        <div style={{ width: '20px', height: '20px', background: '#28a745', borderRadius: '4px', boxShadow: '0 0 10px rgba(40,167,69,0.5)' }}></div>
+                        <span style={{ color: '#ccc', fontSize: '0.9rem' }}>Selected</span>
                     </div>
                 </div>
 
             </div>
 
             {selectedSeats.length > 0 && (
-                <div style={{
-                    background: '#fff',
+                <div className="card" style={{
                     padding: '1.5rem',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     position: 'sticky',
-                    bottom: '20px'
+                    bottom: '20px',
+                    margin: '0 auto',
+                    width: '100%',
+                    backdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(229, 9, 20, 0.3)'
                 }}>
                     <div style={{ textAlign: 'left' }}>
-                        <h3 style={{ margin: '0 0 0.5rem 0', color: '#222' }}>Selected: {selectedSeats.join(', ')}</h3>
-                        <p style={{ margin: 0, fontSize: '1.2rem', color: '#222', fontWeight: 'bold' }}>
-                            Total: <span style={{ color: '#e50914' }}>₹{selectedSeats.length * showPrice}</span>
+                        <h3 style={{ margin: '0 0 0.5rem 0', color: '#fff' }}>Selected: {selectedSeats.join(', ')}</h3>
+                        <p style={{ margin: 0, fontSize: '1.2rem', color: '#ccc', fontWeight: 'bold' }}>
+                            Total: <span style={{ color: '#28a745', textShadow: '0 0 10px rgba(40,167,69,0.4)' }}>₹{selectedSeats.length * showPrice}</span>
                         </p>
                     </div>
                     <button
