@@ -59,6 +59,24 @@ const AdminMovieDetails = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem' }}>
+            <div style={{ marginBottom: '1.5rem' }}>
+                <button 
+                    onClick={() => navigate('/admin/home')}
+                    style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'inherit',
+                        fontSize: '1.2rem',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                    }}
+                    title="Back to Home"
+                >
+                    &larr; Back to Movies
+                </button>
+            </div>
             <div
                 className="card movie-details-layout"
                 style={{

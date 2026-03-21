@@ -78,7 +78,24 @@ const SeatSelection = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem', maxWidth: '800px', textAlign: 'center', color: '#fff' }}>
-            <h2 style={{ marginBottom: '2rem', color: '#fff' }}>Select Your Seats</h2>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: '2rem' }}>
+                <button 
+                    onClick={() => navigate(-1)}
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'inherit',
+                        fontSize: '1.5rem',
+                        cursor: 'pointer'
+                    }}
+                    title="Back to Movie Details"
+                >
+                    &larr; Back
+                </button>
+                <h2 style={{ margin: 0, color: '#fff' }}>Select Your Seats</h2>
+            </div>
 
             <div className="card" style={{
                 padding: '3rem 2rem',

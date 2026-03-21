@@ -94,7 +94,7 @@ body.light .footer-container {
 }
 
 body.light .footer-section h2 {
-    color: #4CAFA7;
+    color: #28a745 !important;
 }
 
 body.light .footer-section h4 {

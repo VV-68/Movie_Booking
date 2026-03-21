@@ -294,7 +294,7 @@ const Home = () => {
                     </div>
 
                     {/* Clear Filters Button */}
-                    <button onClick={handleClearFilters} style={btnStyle}>
+                    <button className="clear-filters-btn" onClick={handleClearFilters} style={btnStyle}>
                         Clear Filters
                     </button>
 

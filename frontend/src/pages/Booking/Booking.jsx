@@ -40,7 +40,24 @@ const Booking = () => {
 
     return (
         <div className="container" style={{ padding: '3rem 1rem', maxWidth: '600px' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#fff' }}>Booking Summary</h2>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: '2rem' }}>
+                <button 
+                    onClick={() => navigate(-1)}
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'inherit',
+                        fontSize: '1.5rem',
+                        cursor: 'pointer'
+                    }}
+                    title="Back to Seat Booking"
+                >
+                    &larr; Back
+                </button>
+                <h2 style={{ margin: 0, color: '#fff' }}>Booking Summary</h2>
+            </div>
 
             <div className="card" style={{ padding: '2.5rem' }}>
                 <h3 style={{ marginBottom: '1.5rem', color: '#e50914', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>

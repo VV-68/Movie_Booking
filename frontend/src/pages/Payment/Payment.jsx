@@ -103,7 +103,23 @@ const Payment = () => {
 
     return (
         <div className="form-container">
-            <div className="card form-card" style={{ maxWidth: '550px' }}>
+            <div className="card form-card" style={{ maxWidth: '550px', position: 'relative' }}>
+                <button 
+                    onClick={() => navigate(-1)}
+                    style={{
+                        position: 'absolute',
+                        top: '1.5rem',
+                        left: '1.5rem',
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'inherit',
+                        fontSize: '1.5rem',
+                        cursor: 'pointer'
+                    }}
+                    title="Back to Seat Booking"
+                >
+                    &larr;
+                </button>
                 <h2 className="text-center" style={{ marginBottom: '2.5rem' }}>Secure Payment</h2>
                 
                 <h3 style={{ marginBottom: '1.5rem', color: '#e50914', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem', fontSize: '1.3rem' }}>

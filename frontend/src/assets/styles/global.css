@@ -329,7 +329,7 @@ body.light .form-link:hover {
  * With !important, the inherited value (#111 from body.light) overrides ALL inline colors.
  * We carve out exceptions for elements that need to keep white text on colored backgrounds.
  */
-body.light *:not(.register-btn):not(.profile-btn):not(.theme-toggle-btn):not(.btn-primary):not(.view-details-btn):not(.ticket-header):not(.ticket-header *):not(.seat):not(.close-btn):not(.logout-btn) {
+body.light *:not(.register-btn):not(.profile-btn):not(.theme-toggle-btn):not(.btn-primary):not(.view-details-btn):not(.ticket-header):not(.ticket-header *):not(.seat):not(.close-btn):not(.logout-btn):not(.clear-filters-btn) {
     color: inherit !important;
 }
 
