@@ -24,7 +24,7 @@ const AdminMyShows = () => {
 
         const fetchShows = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/shows');
+                const res = await fetch('https://movie-booking-ivvj.onrender.com/api/shows');
                 const data = await res.json();
                 const allShows = Array.isArray(data) ? data : [];
                 const mine = allShows.filter((show) => {
