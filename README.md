@@ -6,8 +6,8 @@ This project focuses on solving real-world challenges like **concurrency control
 ---
 ## 🌐 Live Demo
 
-🚀 **Frontend:** 
-⚙️ **Backend API:**
+🚀 **Frontend:**https://movie-booking-blush-rho.vercel.app/ 
+⚙️ **Backend API:**https://movie-booking-ivvj.onrender.com/
 
 ---
 
